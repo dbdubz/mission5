@@ -1,0 +1,64 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model mission5.Models.Grade
+@{
+    ViewData["Title"] = "Grade Calculator";
+
+    // access values from the context for the url
+    string Letter = Context.Request.Query["Letter"].ToString();
+    string Grade = Context.Request.Query["Grade"].ToString();
+    string Assignments = Context.Request.Query["Assignments"].ToString();
+    string GroupProjects = Context.Request.Query["GroupProjects"].ToString();
+    string Quizzes = Context.Request.Query["Quizzes"].ToString();
+    string Midterm = Context.Request.Query["Midterm"].ToString();
+    string Final = Context.Request.Query["Final"].ToString();
+    string Intex = Context.Request.Query["Intex"].ToString();
+}
+<!-- form for calculating the grade -->
+<h3>Grade Calculator</h3>
+<p>Input your percentage grade for each main grading category in IS413. Please use whole/large decimal numbers (100% = 100 or 90.5% = 90.5)</p>
+<form asp-controller="Home" asp-action="GradeCalculator" method="post">
+    
+    <!-- Output for the grade -->
+    <p id="print_grade" style="font-weight: bold" hidden>Grade: @Letter (@Grade%)</p>
+
+    <!-- Comparitive values to show grade, if it exists-->
+    <input type="text" value="@Letter" id="letter" hidden />
+    <input type="number" value="@Grade" id="grade" hidden />
+
+    <!-- Form and placeholder values -->
+    <label for="assignments" asp-for="Assignments">Assignments</label>
+    <input type="number" id="assignments" asp-for="Assignments" placeholder="@Assignments" />
+    <span asp-validation-for="Assignments" style="color: red;"></span>
+    <br /><br />
+
+    <label for="group_projects" asp-for="GroupProjects">Group Projects</label>
+    <input type="number" id="group_projects" asp-for="GroupProjects" placeholder="@GroupProjects" />
+    <span asp-validation-for="GroupProjects" style="color: red;"></span>
+    <br /><br />
+
+    <label for="quizzes" asp-for="Quizzes">Quizzes</label>
+    <input type="number" id="quizzes" asp-for="Quizzes" placeholder="@Quizzes" />
+    <span asp-validation-for="Quizzes" style="color: red;"></span>
+    <br /><br />
+
+    <label for="midterm" asp-for="Midterm">Midterm</label>
+    <input type="number" id="midterm" asp-for="Midterm" placeholder="@Midterm" />
+    <span asp-validation-for="Midterm" style="color: red;"></span>
+    <br /><br />
+
+    <label for="final" asp-for="Final">Final</label>
+    <input type="number" id="final" asp-for="Final" placeholder="@Final" />
+    <span asp-validation-for="Final" style="color: red;"></span>
+    <br /><br />
+
+    <label for="intex" asp-for="Intex">INTEX</label>
+    <input type="number" id="intex" asp-for="Intex" placeholder="@Intex" />
+    <span asp-validation-for="Intex" style="color: red;"></span>
+    <br /><br />
+
+    <button type="submit">calculate</button>
+</form>
+<br /><br />
+<script src="~/js/site.js"></script>
